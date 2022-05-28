@@ -16,17 +16,19 @@
         </header>
         <main class="container-fluid no-gutters">
             <div class="row">
-                <section class="col-3 d-flex flex-column align-items-center">
-                    <div class="card d-flex">
-                        <div class="card-body justify-content-around">
+                <section class="col-6 col-md-4 col-lg-3">
+                    <div class="card align-items-center">
+                        <div class=" card-body justify-content-around search-card">
                             <div class="search-group">
-                                <h3 class="card-title">Search for a City:</h3>
+                                <h4 class="card-title">Search for a City:</h4>
                             </div>
-                            <div class="search-group card-body">
-                                <input class="form-control" type="text"id="search-input" placeholder="Enter City Name">
+                            <div class="search-group">
+                                <div class="input-group">
+                                    <input class="form-control" type="text"id="search-input" placeholder="Enter City Name">
+                                </div>
                                 <div id="search-form">
-                                    <button class="main-btns btn btn-primary" id="search">Search</button>
-                                    <button class="main-btns btn btn-secondary" id="clear">Clear History</button>
+                                    <button class="main-btns btn btn-block btn-primary" id="search">Search</button>
+                                    <button class="main-btns btn btn-block btn-secondary" id="clear">Clear History</button>
                                 </div>
                             </div>
                             <div class="search-group card-body">
@@ -36,10 +38,10 @@
                         </div>
                     </div>
                 </section>
-                <section class="weather col-9">
+                <section class="weather col-6 col-md-8 col-lg-9">
                     <div class="row main-row">
                         <div class="col-12">
-                            <h4><span id="name-date">No City Provided</span><img id='icon' class='icon' src="" alt=""></h4>
+                            <h4><span id="name-date"></span><img id='icon' class='icon' src="" alt=""></h4>
                             <p id="temp">Temp:</p>
                             <p id="wind">Wind: </p>
                             <p id="humid">Humidity: </p>
@@ -52,60 +54,60 @@
                                 5-Day Forecast: 
                             </h4>
                         </section>
-                        <section class="col-12">
-                            <div class="row">
+                        <section class="col-12 forecast">
+                            <div class="row ">
                                 <div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title" id="date-1" name="daily-title">(05/05/05)</h5>
-                                            <img class='icon' id="icon-1" src="http://openweathermap.org/img/wn/10d@2x.png" alt="">
-                                            <p id="temp-1">Temp</p>
-                                            <p id="wind-1">Wind</p>
-                                            <p id="humid-1">Humidity</p>
+                                            <h5 class="card-title" id="date-1"></h5>
+                                            <img class='icon' id="icon-1" src="">
+                                            <p id="temp-1"></p>
+                                            <p id="wind-1"></p>
+                                            <p id="humid-1"></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title" id="date-2" name="daily-title">(05/05/05)</h5>
-                                            <img class='icon' id="icon-2" src="http://openweathermap.org/img/wn/10d@2x.png" alt="">
-                                            <p id="temp-2">Temp</p>
-                                            <p id="wind-2">Wind</p>
-                                            <p id="humid-2">Humidity</p>
+                                            <h5 class="card-title" id="date-2"></h5>
+                                            <img class='icon' id="icon-2" src="">
+                                            <p id="temp-2"></p>
+                                            <p id="wind-2"></p>
+                                            <p id="humid-2"></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title" id="date-3" name="daily-title">(05/05/05)</h5>
-                                            <img class='icon' id="icon-3" src="http://openweathermap.org/img/wn/10d@2x.png" alt="">
-                                            <p id="temp-3">Temp</p>
-                                            <p id="wind-3">Wind</p>
-                                            <p id="humid-3">Humidity</p>
+                                            <h5 class="card-title" id="date-3"></h5>
+                                            <img class='icon' id="icon-3" src="">
+                                            <p id="temp-3"></p>
+                                            <p id="wind-3"></p>
+                                            <p id="humid-3"></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title" id="date-4" name="daily-title">(05/05/05)</h5>
-                                            <img class='icon' id="icon-4" src="http://openweathermap.org/img/wn/10d@2x.png" alt="">
-                                            <p id="temp-4">Temp</p>
-                                            <p id="wind-4">Wind</p>
-                                            <p id="humid-4">Humidity</p>
+                                            <h5 class="card-title" id="date-4"></h5>
+                                            <img class='icon' id="icon-4" src="">
+                                            <p id="temp-4"></p>
+                                            <p id="wind-4"></p>
+                                            <p id="humid-4"></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title" id="date-5" name="daily-title">(05/05/05)</h5>
-                                            <img class='icon' id="icon-5" src="http://openweathermap.org/img/wn/10d@2x.png" alt="">
-                                            <p id="temp-5">Temp</p>
-                                            <p id="wind-5">Wind</p>
-                                            <p id="humid-5">Humidity</p>
+                                            <h5 class="card-title" id="date-5"></h5>
+                                            <img class='icon' id="icon-5" src="">
+                                            <p id="temp-5"></p>
+                                            <p id="wind-5"></p>
+                                            <p id="humid-5"></p>
                                         </div>
                                     </div>
                                 </div>

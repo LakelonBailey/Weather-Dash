@@ -6,6 +6,7 @@ var API_KEY = 'a7243de9e3a64e60260334e5eb3350ef'
 var city
 const date = new Date();
 
+// This function automatically displays the current date and the of the next five days upon loading into the website. 
 var displayDates = function() {
     document.getElementById("name-date").textContent = date.toDateString().substring(4);
     for (var i = 1; i<=5; i++) {
@@ -14,6 +15,8 @@ var displayDates = function() {
         document.getElementById("date-" + i).textContent = newDate.toDateString().substring(4);
     }
 }
+
+// This function uses the Current Weather API to obtain weather data on a specific city
 var grabData = function () {
     var API_KEY = 'a7243de9e3a64e60260334e5eb3350ef'
     url = 'https://api.openweathermap.org/data/2.5/weather?q=' +city+'&appid='+API_KEY;
@@ -35,6 +38,7 @@ var grabData = function () {
     })
     
 }
+// This function uses the data from the grabData function to determine the city's longitude and latitude and then call the One Call API in order to obtain forecast information.
 var switchAPI = function(data) {
     var lat = data.coord.lat;
     var lon = data.coord.lon;
@@ -47,6 +51,8 @@ var switchAPI = function(data) {
         })
     })
 }
+
+// This function displays weather data for the current day.
 var displayCurrent = function(data) {
     var uvColors = ["#2ECC71", "#D1FF33","#FCFF33", "#FFD133", "#FF9F33","#FF7A33","#FF3333","#C74A4A","#C74A92","#FF00FF"];
     document.getElementById("name-date").textContent = city + ' (' + date.toDateString() + ')';
@@ -64,6 +70,7 @@ var displayCurrent = function(data) {
     document.getElementById("uv").style.backgroundColor = uvColor;
 }
 
+// This function displays weather data for the next 5 days. 
 var displayFuture = function(data) {
     var daysArr = data.daily;
     for (var i = 0; i<daysArr.length; i++) {
@@ -74,6 +81,7 @@ var displayFuture = function(data) {
     }
 }
 
+// This function saves a search term to the search history if it is a new term. 
 var saveSearch = function(newSearch) {
     storedSearches = localStorage.getItem("searches");
     if (storedSearches) {
@@ -96,6 +104,7 @@ var saveSearch = function(newSearch) {
     viewSearchHistory()
 }
 
+// This function displays all search history
 var viewSearchHistory = function() {
     var searchHistoryEl = document.getElementById("history-container");
     searchHistoryEl.replaceChildren()
@@ -111,10 +120,13 @@ var viewSearchHistory = function() {
     }
 }
 
+// This function clears search history
 var clearHistory = function() {
     localStorage.removeItem("searches")
     viewSearchHistory()
 }
+
+// This event listener waits for a click of the search button and clear history button
 searchFormEl.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -135,6 +147,8 @@ searchFormEl.addEventListener("click", function(event) {
         
     }
 })
+
+// This event listener waits for a click from one of the search history items. 
 searchHistoryEl.addEventListener("click", function(event) {
     event.preventDefault()
     event.stopPropagation()
