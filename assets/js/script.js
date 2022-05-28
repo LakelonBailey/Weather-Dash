@@ -45,7 +45,6 @@ var switchAPI = function(data) {
     var newCallUrl = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon+"&exclude=alerts&units=imperial&appid="+API_KEY);
     fetch(newCallUrl).then(function(response) {
         response.json().then(function(data) {
-            console.log(data);
             displayCurrent(data);
             displayFuture(data);
         })
