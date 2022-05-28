@@ -1,9 +1,4 @@
 
-
-header {
-    background-color: aqua;
-}
-
 .search-group {
     margin: 8px;
 }
@@ -22,4 +17,22 @@ header {
 }
 .history-btn {
     margin: 4px;
+}
+.icon {
+    width: 50px;
+}
+.row {
+    margin: 12px 0;
+}
+#uv {
+    padding: 4px;
+}
+.main-row {
+    padding: 12px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .1);
+}
+header h1 {
+    display: flex;
+    justify-content: center;
 }

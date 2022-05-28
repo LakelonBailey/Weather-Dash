@@ -1,23 +1,29 @@
 // need to grab current weather and display it and then log lat and lon and then use one call to get daily forecast stuff - need to test this
 var searches
-var searchFormEl = document.querySelector(".main-btns")
+var searchFormEl = document.querySelector("#search-form")
 var clearHistoryBtn = document.querySelector("#clear")
 var searchHistoryEl = document.getElementById("history-container");
-var searchHandle = function(event) {
-
+var API_KEY = 'a7243de9e3a64e60260334e5eb3350ef'
+var city
+const date = new Date();
+var displayDates = function() {
+    document.getElementById("name-date").textContent = date.toDateString().substring(4);
+    for (var i = 1; i<=5; i++) {
+        var newDate = new Date();
+        newDate.setDate(date.getDate() + i)
+        document.getElementById("date-" + i).textContent = newDate.toDateString().substring(4);
+    }
 }
-
-
-var grabData = function (city) {
+var grabData = function () {
     var API_KEY = 'a7243de9e3a64e60260334e5eb3350ef'
     url = 'https://api.openweathermap.org/data/2.5/weather?q=' +city+'&appid='+API_KEY;
     fetch(url)
     .then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-            console.log(data);
             saveSearch(city)
-            displayWeather(data);
+            city = data.name;
+            switchAPI(data);
             })
         }
         else {
@@ -29,7 +35,36 @@ var grabData = function (city) {
     })
     
 }
-var displayWeather = function() {
+var switchAPI = function(data) {
+    var lat = data.coord.lat;
+    var lon = data.coord.lon;
+    var newCallUrl = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon+"&exclude=alerts&units=imperial&appid="+API_KEY);
+    fetch(newCallUrl).then(function(response) {
+        response.json().then(function(data) {
+            console.log(data);
+            displayCurrent(data);
+            displayFuture(data);
+        })
+    })
+}
+var displayCurrent = function(data) {
+    var uvColors = ["#2ECC71", "#D1FF33","#FCFF33", "#FFD133", "#FF9F33","#FF7A33","#FF3333","#C74A4A","#C74A92","#FF00FF"];
+    document.getElementById("name-date").textContent = city + ' (' + date.toDateString() + ')';
+    document.getElementById("icon").setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.current.weather[0].icon +'@2x.png');
+    document.getElementById("temp").textContent = "Temp: " + data.current.temp + " ˚F";
+    document.getElementById("wind").textContent = "Wind: " + data.current.wind_speed + " mph";
+    document.getElementById("humid").textContent = "Humidity: " + data.current.humidity + "%";
+    var uvIndex = data.current.uvi;
+    var uvColorIndex = Math.round(uvIndex);
+    if (uvColorIndex > 9) {
+        uvColorIndex = 9;
+    }
+    var uvColor = uvColors[uvColorIndex];
+    document.getElementById("uv").textContent = uvIndex
+    document.getElementById("uv").style.backgroundColor = uvColor;
+}
+
+var displayFuture = function(data) {
 
 }
 
@@ -64,32 +99,44 @@ var viewSearchHistory = function() {
             var searchItem = document.createElement("button");
             searchItem.value = searchArr[i];
             searchItem.textContent = searchArr[i];
-            searchItem.classList = "history-btn btn btn-sm btn-secondary btn-block";
+            searchItem.classList = "history-btn btn btn-block list-group-item";
             searchHistoryEl.appendChild(searchItem);
         }
-}
+    }
 }
 
 var clearHistory = function() {
-    localStorage.removeItem("searches");
-    searchHistoryEl.replaceChildren()
+    localStorage.removeItem("searches")
+    viewSearchHistory()
 }
 searchFormEl.addEventListener("click", function(event) {
-    event.stopPropagation()
     event.preventDefault();
+    event.stopPropagation();
     var btnChoiceId = event.target.getAttribute("id");
     if (btnChoiceId == "clear") {
-        clearHistory()
+        clearHistory();
     }
     else {
         var searchInputEl = document.getElementById('search-input');
-        grabData(searchInputEl.value);
-        saveSearch(searchInputEl.value)
-        searchInputEl.value ='';
+        if (searchInputEl.value != '') {
+            city = searchInputEl.value;
+            grabData();
+            searchInputEl.value ='';
+        }
+        else {
+            alert('Please Enter a City Name')
+        }
+        
     }
 })
 searchHistoryEl.addEventListener("click", function(event) {
+    event.preventDefault()
     event.stopPropagation()
-    grabData(event.target.value)
+    city = event.target.value
+    grabData()
 })
+
+displayDates();
 viewSearchHistory();
+
+
