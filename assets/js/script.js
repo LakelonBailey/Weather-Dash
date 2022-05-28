@@ -1,4 +1,3 @@
-// need to grab current weather and display it and then log lat and lon and then use one call to get daily forecast stuff - need to test this
 var searches
 var searchFormEl = document.querySelector("#search-form")
 var clearHistoryBtn = document.querySelector("#clear")
@@ -6,6 +5,7 @@ var searchHistoryEl = document.getElementById("history-container");
 var API_KEY = 'a7243de9e3a64e60260334e5eb3350ef'
 var city
 const date = new Date();
+
 var displayDates = function() {
     document.getElementById("name-date").textContent = date.toDateString().substring(4);
     for (var i = 1; i<=5; i++) {
@@ -65,7 +65,13 @@ var displayCurrent = function(data) {
 }
 
 var displayFuture = function(data) {
-
+    var daysArr = data.daily;
+    for (var i = 0; i<daysArr.length; i++) {
+        document.getElementById("icon-" + (i+1)).setAttribute('src', 'http://openweathermap.org/img/wn/'+ daysArr[i].weather[0].icon +'@2x.png')
+        document.getElementById("temp-"+(i+1)).textContent = "Temp: " + daysArr[i].temp.day + " ˚F";
+        document.getElementById("wind-"+(i+1)).textContent = "Wind: " + daysArr[i].wind_speed + " MPH";
+        document.getElementById("humid-"+(i+1)).textContent = "Humidity: " + daysArr[i].humidity + "%";
+    }
 }
 
 var saveSearch = function(newSearch) {
@@ -99,7 +105,7 @@ var viewSearchHistory = function() {
             var searchItem = document.createElement("button");
             searchItem.value = searchArr[i];
             searchItem.textContent = searchArr[i];
-            searchItem.classList = "history-btn btn btn-block list-group-item";
+            searchItem.classList = "history-btn btn btn-secondary btn-block";
             searchHistoryEl.appendChild(searchItem);
         }
     }
