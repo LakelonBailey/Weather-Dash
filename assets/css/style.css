@@ -1,0 +1,25 @@
+
+
+header {
+    background-color: aqua;
+}
+
+.search-group {
+    margin: 8px;
+}
+
+.search-group {
+    width: 100%;
+    text-align: center;
+}
+#search-input {
+    margin: 4px;
+}
+
+.search-group:last-child {
+    border-top: 2px solid black;
+    padding: 4px;
+}
+.history-btn {
+    margin: 4px;
+}
